@@ -6,7 +6,7 @@ namespace Quiz.Dal
 {
     public partial class AppContext : DbContext
     {
-        private readonly string _connectionStr = "User ID=postgres; Password=deva; Host=localhost; Port=5432; Database=QuizDb; Pooling=false; Timeout=300; CommandTimeout=180;";
+        private readonly string _connectionStr = "";
 
         //dotnet-ef migrations add Initials --startup-project ..\Quiz.Service  // yan çizgiye dikkat et
 
