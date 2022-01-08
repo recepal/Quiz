@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quiz.Dal;
+using Quiz.Dtos;
 
 namespace Quiz.Service.Controller
 {
@@ -17,7 +18,7 @@ namespace Quiz.Service.Controller
         [HttpGet("test")]
         public ActionResult Test()
         {
-            return Ok("tamam");
+            return Ok("Servis çalışıyor.");
         }
 
         [HttpGet("createDb")]
@@ -27,6 +28,20 @@ namespace Quiz.Service.Controller
 
             string message = result ? "Db oluşturuldu..." : "Db oluşturulamadı...";
             return Ok(message);
+        }
+
+        [HttpPost("saveQuiz")]
+        public ActionResult<bool> SaveQuiz(List<QuestionAndAnswerPackDto> questionAndAnswerPackDtos)
+        {
+            List<QuestionDto> insertableQuestionDtos = new List<QuestionDto>();
+            List<AnswerDto> insertableAnswerDtor = new List<AnswerDto>();
+
+            foreach (QuestionAndAnswerPackDto item in questionAndAnswerPackDtos)
+            {
+                
+            }
+
+            return true;
         }
     }
 }

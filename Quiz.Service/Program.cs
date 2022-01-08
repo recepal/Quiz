@@ -1,5 +1,7 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Quiz.Service;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,14 @@ static void ConfigureServices(IServiceCollection services)
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
     services.AddControllers();
+
+    var mapperConfig = new MapperConfiguration(mc =>
+    {
+        mc.AddProfile(new QuizProfile());
+    });
+
+    IMapper mapper = mapperConfig.CreateMapper();
+    services.AddSingleton(mapper);
 }
 
 static void Configure(WebApplication app, IWebHostEnvironment env)

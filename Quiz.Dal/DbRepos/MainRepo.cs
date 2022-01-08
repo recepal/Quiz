@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Quiz.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,16 @@ namespace Quiz.Dal
             }
 
             return result;
+        }
+
+        public void AddQuestions(List<Question> questions)
+        {
+            _context.Questions.AddRange(questions);
+        }
+
+        public void AddAnswers(List<Answer> answers)
+        {
+            _context.Answers.AddRange(answers);
         }
     }
 }
