@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Quiz.Model
 {
-    [Table("questions", Schema = "que")]
+    [Table("questions")]
     public class Question : EntityBase
     {
+        public Guid ExamId { get; set; }
         public string Description { get; set; }
     }
 }

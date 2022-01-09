@@ -9,11 +9,8 @@ namespace Quiz.Dal.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "que");
-
             migrationBuilder.CreateTable(
-                name: "Answers",
+                name: "answers",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -25,15 +22,30 @@ namespace Quiz.Dal.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Answers", x => x.Id);
+                    table.PrimaryKey("PK_answers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "exams",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Header = table.Column<string>(type: "text", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    Counter = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_exams", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "questions",
-                schema: "que",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ExamId = table.Column<Guid>(type: "uuid", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     Counter = table.Column<int>(type: "integer", nullable: false)
@@ -47,11 +59,13 @@ namespace Quiz.Dal.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Answers");
+                name: "answers");
 
             migrationBuilder.DropTable(
-                name: "questions",
-                schema: "que");
+                name: "exams");
+
+            migrationBuilder.DropTable(
+                name: "questions");
         }
     }
 }

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Quiz.Model
 {
+    [Table("answers")]
     public class Answer : EntityBase
     {
         public Guid QuestionId { get; set; }

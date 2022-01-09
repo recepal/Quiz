@@ -46,7 +46,31 @@ namespace Quiz.Dal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Answers");
+                    b.ToTable("answers");
+                });
+
+            modelBuilder.Entity("Quiz.Model.Exam", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Counter")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Header")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("exams");
                 });
 
             modelBuilder.Entity("Quiz.Model.Question", b =>
@@ -62,12 +86,15 @@ namespace Quiz.Dal.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
-                    b.ToTable("questions", "que");
+                    b.ToTable("questions");
                 });
 #pragma warning restore 612, 618
         }

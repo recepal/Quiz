@@ -1,9 +1,4 @@
 ﻿using Quiz.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quiz.Dal
 {
@@ -12,5 +7,12 @@ namespace Quiz.Dal
         bool CreateDb();
         void AddQuestions(List<Question> questions);
         void AddAnswers(List<Answer> answers);
+        void AddExam(Exam exam);
+        Task<Exam> GetExam(Guid examId);
+        void UpdateExam(Exam exam);
+        Task<List<Exam>> GetExams();
+        Task<List<Question>> GetQuestionsByExamId(Guid examId);
+        Task<List<Answer>> GetAnswersByQuestionId(Guid questionId);
+        Task<bool> SaveAsync();
     }
 }

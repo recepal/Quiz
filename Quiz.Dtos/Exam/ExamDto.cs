@@ -1,11 +1,10 @@
 ﻿namespace Quiz.Dtos
 {
-    public class QuestionDto
+    public class ExamDto
     {
         public Guid Id { get; set; }
         public bool IsDeleted { get; set; }
         public int Counter { get; set; }
-        public string Description { get; set; }
-        public Guid ExamId { get; set; }
+        public string Header { get; set; }
     }
 }
