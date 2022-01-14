@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Quiz.Dal;
 using Quiz.Dtos;
 using Quiz.Model;
+using System.Net;
+using System.Text;
 
 namespace Quiz.Service.Controller
 {
@@ -25,7 +27,7 @@ namespace Quiz.Service.Controller
             return Ok("Servis çalışıyor.");
         }
 
-        [HttpGet("createDb")]
+        [HttpGet("db")]
         public ActionResult CreateDb()
         {
             bool result = _repo.CreateDb();
@@ -34,7 +36,7 @@ namespace Quiz.Service.Controller
             return Ok(message);
         }
 
-        [HttpPost("saveExam")]
+        [HttpPost("exam")]
         public async Task<ActionResult<bool>> SaveExam(ExamPack examPack)
         {
             List<QuestionDto> insertableQuestionDtos = new List<QuestionDto>();
@@ -63,7 +65,7 @@ namespace Quiz.Service.Controller
             return await _repo.SaveAsync();
         }
 
-        [HttpGet("deleteExam/{examId}")]
+        [HttpGet("exam/{examId}")]
         public async Task<ActionResult<bool>> DeleteExam(Guid examId)
         {
             var exam = await _repo.GetExam(examId);
@@ -74,7 +76,7 @@ namespace Quiz.Service.Controller
             return await _repo.SaveAsync();
         }
 
-        [HttpGet("getExamPage")]
+        [HttpGet("examPage")]
         public async Task<ActionResult<List<ExamPack>>> GetExamPage()
         {
             List<ExamPack> examPacks = new List<ExamPack>();
@@ -96,7 +98,7 @@ namespace Quiz.Service.Controller
                     QuestionAndAnswerPackDto questionAndAnswerPackDto = new QuestionAndAnswerPackDto();
 
                     var answers = await _repo.GetAnswersByQuestionId(question.Id);
-                    questionAndAnswerPackDto.Question =_mapper.Map<QuestionDto>(question);
+                    questionAndAnswerPackDto.Question = _mapper.Map<QuestionDto>(question);
                     questionAndAnswerPackDto.Answers = _mapper.Map<List<AnswerDto>>(answers);
                     examPack.QuestionAndAnswers.Add(questionAndAnswerPackDto);
                 }
@@ -107,5 +109,6 @@ namespace Quiz.Service.Controller
 
             return examPacks;
         }
+
     }
 }
